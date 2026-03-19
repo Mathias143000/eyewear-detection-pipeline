@@ -1,0 +1,14 @@
+services:
+  eyewear-api:
+    build: .
+    container_name: eyewear-api
+    ports:
+      - "8000:8000"
+    environment:
+      EYEWEAR_MODEL_TYPE: baseline
+      EYEWEAR_MODEL_PATH: /app/models/baseline_glasses.joblib
+    volumes:
+      - ./models:/app/models
+      - ./artifacts:/app/artifacts
+      - ./reports:/app/reports
+
