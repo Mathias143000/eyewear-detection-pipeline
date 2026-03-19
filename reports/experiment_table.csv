@@ -1,0 +1,4 @@
+experiment,model_type,status,threshold,precision,recall,f1,roc_auc,note
+baseline_lr,baseline,ok,0.05,1.0,1.0,1.0,1.0,
+torch_mnv3_small_e2,torch,ok,0.05,0.5,1.0,0.6666666666666666,0.5,"{""val_accuracy"": 0.5}"
+torch_mnv3_small_e4,torch,ok,0.05,0.5,1.0,0.6666666666666666,0.5,"{""val_accuracy"": 0.5}"

@@ -1,0 +1,5 @@
+experiment,model_type,model_name,epochs,batch_size,lr,status,threshold,precision,recall,f1,roc_auc,model_path,note
+baseline_lr,baseline,baseline_lr,0,0,0.0,ok,0.05,0.4452054794520548,0.5416666666666666,0.48872180451127817,0.46819444444444447,models\baseline_glasses.joblib,
+torch_mnv3_small_e2,torch,mobilenet_v3_small,2,16,0.001,ok,0.05,0.5,1.0,0.6666666666666666,0.6412152777777778,models\torch_mnv3_small_e2.pt,"{""val_accuracy"": 0.5}"
+torch_mnv3_small_e4,torch,mobilenet_v3_small,4,16,0.0007,ok,0.05,0.5,1.0,0.6666666666666666,0.5128125,models\torch_mnv3_small_e4.pt,"{""val_accuracy"": 0.5}"
+torch_efficientnet_b0_e8,torch,efficientnet_b0,8,24,0.0003,ok,0.6599999999999999,0.9159663865546218,0.9083333333333333,0.9121338912133892,0.9835416666666665,models\torch_efficientnet_b0_e8.pt,"{""val_accuracy"": 0.9875}"
