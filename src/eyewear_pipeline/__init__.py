@@ -1,0 +1,2 @@
+"""Eyewear detection pipeline package."""
+
