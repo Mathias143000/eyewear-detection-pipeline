@@ -1,10 +1,16 @@
 .venv/
+venv/
 __pycache__/
 .pytest_cache/
+.ruff_cache/
+.mypy_cache/
 *.pyc
+*.log
 artifacts/
 reports/*.png
 reports/*.json
+logs/
+mlruns/
 data/raw/
 data/manifest.csv
 data/manifest_*.csv
