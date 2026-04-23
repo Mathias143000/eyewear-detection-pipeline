@@ -11,8 +11,13 @@ class ProjectConfig:
     models_dir: Path = Path("models")
     artifacts_dir: Path = Path("artifacts")
     reports_dir: Path = Path("reports")
+    logs_dir: Path = Path("logs")
     confidence_threshold: float = float(os.getenv("EYEWEAR_CONFIDENCE_THRESHOLD", "0.50"))
     threshold_file_path: Path = Path(os.getenv("EYEWEAR_THRESHOLD_FILE", "artifacts/threshold.json"))
+    model_metadata_path: Path = Path(
+        os.getenv("EYEWEAR_MODEL_METADATA_PATH", "artifacts/serving_model.json")
+    )
+    log_path: Path = Path(os.getenv("EYEWEAR_LOG_PATH", "logs/api.log"))
     haar_cascade_path: str | None = os.getenv("EYEWEAR_HAAR_CASCADE")
 
     @property
@@ -33,3 +38,4 @@ def ensure_dirs(cfg: ProjectConfig) -> None:
     cfg.models_dir.mkdir(parents=True, exist_ok=True)
     cfg.artifacts_dir.mkdir(parents=True, exist_ok=True)
     cfg.reports_dir.mkdir(parents=True, exist_ok=True)
+    cfg.logs_dir.mkdir(parents=True, exist_ok=True)

@@ -36,6 +36,25 @@ def test_model_info_reads_threshold_from_file(monkeypatch: pytest.MonkeyPatch, t
     assert response.json()["confidence_threshold"] == "0.73"
 
 
+def test_ready_and_metrics_endpoints(monkeypatch: pytest.MonkeyPatch, trained_baseline_model: Path) -> None:
+    monkeypatch.setenv("EYEWEAR_MODEL_TYPE", "baseline")
+    monkeypatch.setenv("EYEWEAR_MODEL_PATH", str(trained_baseline_model))
+
+    from importlib import reload
+
+    import eyewear_pipeline.api.main as api_main
+
+    reload(api_main)
+    client = testclient.TestClient(api_main.app)
+    ready_response = client.get("/ready")
+    assert ready_response.status_code == 200
+    assert ready_response.json()["status"] == "ready"
+
+    metrics_response = client.get("/metrics")
+    assert metrics_response.status_code == 200
+    assert b"eyewear_inference_requests_total" in metrics_response.content
+
+
 def test_predict_image_endpoint(monkeypatch: pytest.MonkeyPatch, trained_baseline_model: Path, tmp_path: Path) -> None:
     monkeypatch.setenv("EYEWEAR_MODEL_TYPE", "baseline")
     monkeypatch.setenv("EYEWEAR_MODEL_PATH", str(trained_baseline_model))
@@ -58,4 +77,6 @@ def test_predict_image_endpoint(monkeypatch: pytest.MonkeyPatch, trained_baselin
         response = client.post("/predict/image", files={"file": ("sample.png", f, "image/png")})
     assert response.status_code == 200
     body = response.json()
+    assert "request_id" in body
+    assert body["model"]["model_type"] == "baseline"
     assert "predictions" in body
